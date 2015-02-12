@@ -254,13 +254,13 @@ package org.flowplayer.f4m {
             private function handleStreamNotFound(message:String):void
             {
                 log.error(message);
+                // bugfixed so the browser can handle the error
+                _clip.dispatchError(ClipError.STREAM_NOT_FOUND, message);
 
                 if (_clip.live) {
                     retryF4mLoad();
                     return;
                 }
-
-                _clip.dispatchError(ClipError.STREAM_NOT_FOUND, message);
             }
 
             /**
@@ -347,7 +347,8 @@ package org.flowplayer.f4m {
             {
                 parser.removeEventListener(ParseEvent.PARSE_COMPLETE, onParserLoadComplete);
                 parser.removeEventListener(ParseEvent.PARSE_ERROR, onParserLoadError);
-                log.error("Error parsing manifest");
+                // this was bugfixed to send the browser an error message
+                _clip.dispatchError(ClipError.STREAM_NOT_FOUND, "Error parsing manifest");
             }
 
             private function getParser():ManifestParser

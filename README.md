@@ -1,6 +1,9 @@
 
 # Flowplayer Flash
 
+This repository is forked to store individual changes to the sourcecode. Changes so far:
+1. F4m-plugin error handling (now propagates a cliperror: stream not found event)
+
 
 ## The video player for the web
 
